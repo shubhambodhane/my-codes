@@ -1,0 +1,15 @@
+this is example of route group.
+how to create?
+
+create folder > use brackets > add folder and page > Route group created
+ex. (auth)  > login -page.tsx
+            > register -page.tsx
+
+the way to access them is simple.
+it will not change routes.
+the way to access route will be 
+ex.
+- localhost/login
+- localhost/register
+
+here: auth will group it, it will not take any part in changeing the route

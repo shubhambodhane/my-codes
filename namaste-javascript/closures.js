@@ -1,7 +1,7 @@
 // javascript is single threaded, synchronous language.
 
 // Closures: the function bind together with it's lexical environment.
-// Lexical environment: the access to local memory and parent reference
+// Lexical environment: the access to local memory and reference to parental scope.
 
 // function b() {
 //   var a = 3;
@@ -13,7 +13,9 @@
 // var z = b();
 // console.log(z);
 // z();
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+// output:
+// 3
+//----------------------------------------------------------------------------
 
 // function c(){
 //     var i = 4;
@@ -24,12 +26,15 @@
 // };
 // c();
 
-// here the js wont wait for setTimeout to execute it console log 'hello'
-// then setTimeout executes after 3 sec the value i is logged
+
+// output:
 // hello
 // i = 4 (after 3 seconds)
 
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+// here the js wont wait for setTimeout to execute it console log 'hello'
+// then setTimeout executes after 3 sec the value i is logged
+
+//----------------------------------------------------------------------------
 // function x() {
 //   for (let i = 0; i <= 5; i++) {
 //     setTimeout(() => {
@@ -50,7 +55,7 @@
 // 3 (after 3 seconds)
 // 4 (after 4 seconds)
 // 5 (after 5 seconds)
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+//----------------------------------------------------------------------------
 
 // function a() {
 //   for (var i = 0; i <= 5; i++) {
@@ -61,13 +66,14 @@
 //   console.log("hello");
 // }
 // a();
+
 // output:
 // hello
 // 6 (after 6 seconds)
 // 6 prints 6 times after 6 seconds
 // var is global scope variable it will get the value as last value
 
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+//----------------------------------------------------------------------------
 
 // function outer(){
 //     var a=10;
@@ -79,10 +85,10 @@
 // const myouter= outer();
 // myouter();
 
-// op: 10
+// output: 10
 // innner function formed closure hence a has been accessed
 
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+//----------------------------------------------------------------------------
 
 // function outer2(){
 //     function inner2(){
@@ -94,10 +100,10 @@
 // const close= outer2();
 // close();
 
-// op: 10
+// output: 10
 // closure has form and hoisting is followed here so a=10
 
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+//----------------------------------------------------------------------------
 
 // function outer3() {
 //   function inner3() {
@@ -109,10 +115,10 @@
 // const close3 = outer3();
 // close3();
 
-// op: 10
+// output: 10
 // formed closure and hoisting is followed so a =10
 
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+//----------------------------------------------------------------------------
 
 // function outerest() {
 //     var f=20;
@@ -132,5 +138,47 @@
 // hoisting, closure
 // outerest()("Hello") : passing value to inner function
 
-/////////xxxxxxxxxxxxx///////xxxxxxxxxxxxxx////////xxxxxxxxxxxxxxxx/////////
+//----------------------------------------------------------------------------
+// Q — Loop + var closure
+
+const fns = [];
+for (var i = 0; i < 3; i++) {
+ fns.push(() => i);
+}
+console.log(fns.map(fn => fn()));
+
+// Output:
+// [3, 3, 3]
+//--------------------------------------------------------------------
+// Q — Isolated state factory
+function counter(start = 0) {
+ let n = start;
+ return { inc: () => ++n, val: () => n };
+}
+const a = counter(5), b = counter(5);
+a.inc(); a.inc();
+b.inc();
+console.log(a.val(), b.val());
+
+// output:
+// 7, 6
+// 
+//--------------------------------------------------------------------
+// Q — Stale closure with async
+
+function makeLoggers() {
+ const out = [];
+ for (let i = 0; i < 3; i++) {
+ out.push(() => console.log(i));
+ }
+ return out;
+}
+const [l0, l1, l2] = makeLoggers();
+setTimeout(l0, 0);
+setTimeout(l1, 0);
+setTimeout(l2, 0);
+
+// Output:
+// 0,1,2
+//--------------------------------------------------------------------
 

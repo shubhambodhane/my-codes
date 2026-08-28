@@ -1,0 +1,32 @@
+-> Reference Error:
+- JS will try to find the value (memory space) as value is unavailable then it will give reference error.
+ex,1 console.log(a) // a is not initialized
+
+ex.2
+console.log(a);
+let a = 10;
+
+// a can not be accessed before the initialization
+
+------------------------------------------------------------------------
+-> Syntax Error:
+- as code will have invalid syntax, then this error will shown
+
+ex.1
+const b;
+b=10;
+// missing initializer in const declaration (const can not be re-initialized)
+
+ex.2
+let a =10;
+let a =20;
+// identifier a has been already declared
+---------------------------------------------------------------------
+Type Error:
+- Different type of declaration not possible for const(type error)
+ex, 
+const b=100;
+b=12;
+// b const already declared assigning again same value gives error
+---------------------------------------------------------------------
+

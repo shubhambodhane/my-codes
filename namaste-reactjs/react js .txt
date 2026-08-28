@@ -1,0 +1,21 @@
+React JS prerequisites:
+
+- HTML and CSS basics
+- JavaScript and ES6 features
+- JSX (JavaScript XML or JavaScript Extension)
+
+ES 6 Features for ReactJS?
+- Arrow function
+- variables: var, let, const
+- Template Literals
+- Destructuring Assignment
+- Spread and Rest Operators (...)
+- Promises & Async/Await
+
+What is React JS?
+- It is UI library. Create UIs using on JavaScript ES6 features HTML and CSS and following Component Based Architecture.
+
+What is Babel?
+- Babel is preprocessor which converts JSX code in plain javascript code. i.e. browser understandable 
+- if we do not use then it will be difficult to create components in reactjs. 
+- React Create Element will take 3 arguments,It will be html element then properties of it, content and chi

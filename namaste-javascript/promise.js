@@ -42,6 +42,8 @@ const p3 = new Promise((resolve, reject) => {
 // it waits for all the promises to finish and then returns the result
 // if any of the promise settled as 'fail/reject' it quickly returns error of the promise
 
+// ------------------------------------------------------------------------------------
+
 Promise.all([p1, p2, p3])
   .then((res) => {
     console.log("All then", res);
@@ -56,6 +58,8 @@ Promise.all([p1, p2, p3])
 // it will wait to execute all the promise
 // promise success/failed those will be returned
 
+// ------------------------------------------------------------------------------------
+
 Promise.allSettled([p1, p2, p3])
   .then(function (res) {
     console.log("allSettled res", res);
@@ -63,6 +67,7 @@ Promise.allSettled([p1, p2, p3])
   .catch((e) => {
     console.error("allSettled error", e);
   });
+// ------------------------------------------------------------------------------------
 
 // 3.race():  Promise.race([])
 //  whatever promise settled 'first' success or failed it will return the result
@@ -74,6 +79,7 @@ Promise.race([p1, p2, p3])
   .catch((e) => {
     console.error("race error", e);
   });
+// ------------------------------------------------------------------------------------
 
 // 4. any(): Promise.any()
 // it will return first success settle promise
@@ -87,3 +93,100 @@ Promise.any([p1, p2, p3])
     console.error("error", e);
     console.info(e.errors);
   });
+
+// ------------------------------------------------------------------------------------
+// Q — Microtask vs macrotask order
+
+console.log("A");
+Promise.resolve().then(() => console.log("B"));
+setTimeout(() => console.log("C"), 0);
+console.log("D");
+
+//Output:
+// A D B C
+
+// ------------------------------------------------------------------------------------
+// Q — Promise chaining & throw
+
+Promise.resolve(2)
+ .then(x => x * 2) // 4
+ .then(x => { throw x + 1; })// throws 5
+ .then(() => "skip")
+ .catch(e => e * 2) // 10
+ .then(x => console.log(x));
+
+// output:
+// 10 
+
+// ------------------------------------------------------------------------------------
+// Q — await sequencing
+
+async function f() {
+ console.log(1);
+ await Promise.resolve();
+ console.log(2);
+}
+console.log(0);
+f();
+console.log(3);
+ 
+
+// output:
+// 0 1 3 2
+// ------------------------------------------------------------------------------------
+//Q — Promise.all short circuit
+
+const ok = Promise.resolve("OK");
+const bad = Promise.reject("ERR");
+Promise.all([ok, bad, ok]).then(
+ v => console.log("then", v),
+ e => console.log("catch", e)
+);
+
+// Output:
+// "catch"
+// "ERR"
+
+// ------------------------------------------------------------------------------------
+
+// Q  — Error inside then handler
+
+Promise.resolve(1)
+ .then(x => {
+ if (x === 1) JSON.parse("{bad json}");
+ return x + 1;
+ })
+ .catch(e => "recovered")
+ .then(v => console.log(v));
+
+//output:
+//"recovered"
+
+// ------------------------------------------------------------------------------------
+// Q — async function error propagation
+
+async function h() {
+ throw new Error("X");
+}
+h()
+ .then(() => console.log("ok"))
+ .catch(e => console.log("err:", e.message));
+
+//output:
+// err: X 
+
+// ------------------------------------------------------------------------------------
+
+// Q — Catching async errors
+
+try {
+ Promise.reject(new Error("Boom"));
+} catch (e) {
+ console.log("caught:", e.message);
+}
+console.log("after");
+
+//output:
+// after
+
+// ------------------------------------------------------------------------------------

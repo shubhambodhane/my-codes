@@ -1,0 +1,76 @@
+JavaScript:
+
+- JavaScript is single-threaded, Synchronous language.
+
+- Everything happens inside Execution context. (combination of memory and code component)
+
+- Memory component = Variable Environment = key value pair of variable and function:
+like a=10, function = {}
+- code component = Thread of execution = one command execution (one by one)
+
+-> undefined = special keyword
+- when function execution starts the memory gets assigned to variable, initially the variables gets initializes with "undefined". then the actual value get assigned to it when the function is called. (variable and function gets initializes)
+- Execution context created for it code component, it starts execution one by one line
+
+-> Call Stack:
+- to manage the execution of the tasks it will be useful.
+- the function gets executed in call stack. 
+- Call Stack Follows LIFO. (Last in First Out) : chapati box
+- call stack known by other names:
+1. Program stack
+2. control stack
+3. Runtime stack
+4. Machine stack 
+
+//------------------------------------------------------------------------------
+
+function myFunction(){
+console.log("Hello");
+}
+myFunction();
+
+//output: 
+//Hello 
+
+//------------------------------------------------------------------------------
+// Q — finally return precedence
+
+function g() {
+ try {
+ return "try";
+ } finally {
+ return "finally";
+ }
+}
+console.log(g());
+
+// output:
+// finally
+//------------------------------------------------------------------------------
+
+-> Block :
+- Group of multiple statments inside the curly braces called block.
+ex.
+{
+let a=10;
+//other code
+//
+}
+
+- the variables and functions we can access inside them the block is called as Block scope.
+
+shadowing:
+changing the value of variable from the outside of the block variable
+ex. var a =10;
+{ var a = 9;
+console.log(a);//9
+}
+console.log(a); // 9
+//------------------------------------------------------------------------------
+Ileagal shadowing:
+let a = 10;
+{
+var a =200;
+}
+// sytax error: a has already been declared
+// var = global declared, set memory context so it can not be set using block environment value

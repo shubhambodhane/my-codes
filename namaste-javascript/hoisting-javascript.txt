@@ -1,0 +1,91 @@
+Hoisting in JavaScript:
+
+- It is the default behavior of moving variables declaration to top before the execution of the function.
+- variables: var, let, const follow hoisting
+- the arrow function will also supports hoisting as it will acts as variable.
+ex. const myFun = ()=> { // my code}; // myFun will behave like variable
+
+- In the execution context, the memory first allocated to variables
+the variables gets initializes with undefined.
+- when the function gets called then the actual value gets assigned to it.
+
+-> Undefined vs not defined (null):
+- the variable is declared without the value. ex let a;
+- the variable is declared with intention as null. ex. let b = null; 
+
+-> Temporal dead zone:
+- Time it takes to get actual value assigned to the variable. this is Temporal dead zone.
+//------------------------------------------------------------------------------
+ex.
+function myFun(){
+console.log(a);
+var a = 10;
+}
+myFun();
+
+//output:
+//undefined
+//------------------------------------------------------------------------------
+ex.
+function myFun(){
+console.log(a);
+let a = 10;
+}
+myFun();
+
+//output:
+//error reference error: temporal dead zone
+//------------------------------------------------------------------------------
+ex. arrow function acts as a variable
+function myFun(){
+console.log(a);
+const a =()=>{return "hello" };
+}
+myFun();
+
+//output:
+//error: reference error: temporal dead zone
+//------------------------------------------------------------------------------
+// ex. Redeclaration vs Reassignment
+// What’s printed? What happens if the commented line (B) is uncommented?
+
+var x = 1;
+let y = 2;
+const z = { n: 3 };
+var x = 10;    // A
+// let y = 20; // B (commented)
+z.n = 30;      // C
+console.log(x, y, z.n);
+
+// output:
+// 10, 2, 30
+//------------------------------------------------------------------------------
+// ex. Temporal Dead Zone (TDZ)
+// Q. What does line A log? What occurs if you uncomment line B?
+
+console.log(typeof foo); // A
+// console.log(bar);     // B (commented)
+let bar = 5;
+var foo = 10;
+console.log(foo, bar);
+
+// output:
+// undefined
+// 10,5
+//------------------------------------------------------------------------------
+// ex. Hoisting order pitfall
+// Q. Predict the outputs at A and B and explain why
+
+f();   // A
+var f = function() { 
+console.log('var function');
+ };
+function f() {
+ console.log('declaration');
+ }
+f();  // B
+
+// output:
+// SyntaxError: Identifier 'f' has already been declared
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------

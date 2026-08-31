@@ -74,3 +74,75 @@ var a =200;
 }
 // sytax error: a has already been declared
 // var = global declared, set memory context so it can not be set using block environment value
+//----------------------------------------------------------------------------------------------
+
+-> Function Statement:
+- normal way of defining of function is called as Function statement.
+- also known as function declaration.
+- ex. 
+function a(){ 
+console.log("Hello, Function statement")
+}; 
+a();
+
+//------------------------------------------------------------------------------
+-> Function Expression:
+ - the function gets assigned to the variable, is called as function expression.
+ - function acts like variable.
+ - it supports hoisting, thus it can go to temporal dead zone.
+ - ex.
+ const a = ()=>{
+ console.log("Hello function expression");
+ };
+ a();
+ 
+//------------------------------------------------------------------------------
+
+-> Anonymous function:
+- a function without name is called as Anonymous function.
+- can not be called and executed directly. need to assign to a variable and then execute it.
+
+- ex.
+function(){
+console.log("Anonymous function");
+};
+- to execute:
+const a = function{
+console.log("a called");
+}
+a();
+//------------------------------------------------------------------------------
+-> Named function Expression:
+- a function statement assigned it to variable called as name function expression.
+ex.
+let z= function myfun(){
+console.log("myfuntion");
+}
+z();
+//------------------------------------------------------------------------------
+
+-> First class functions:
+- The ability of the functions to be used as values, can be passed as argument, 
+can be returned from function, this is called as First class function.
+
+//------------------------------------------------------------------------------
+-> Higher order function:
+- The function which takes another as an argument ,or returns a function from it, this is called as Higher order function.
+- ex. methods: filter, map, setTimeout  
+
+//------------------------------------------------------------------------------
+
+Parameters vs Arguments: (in function)
+
+Parameters:
+- local variable passed inside the function
+- while creating a function the variable passed in the function is called as parameter.
+- ex. function myfun(para1,para2 ){
+console.log("parameters", para1, para2);
+}
+
+Arguments:
+- the actual value passed to the function while the function is calling.
+- when calling function the actual values are passed to it called as Arugments.
+- ex. function(arg1,arg2); // arguments;
+//------------------------------------------------------------------------------

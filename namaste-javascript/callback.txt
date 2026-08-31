@@ -1,0 +1,47 @@
+-> Callback function:
+
+- When an function is passed as an argument to other function. that function is called as Callback function.
+- ex. setTimeout(()=>{
+console.log("set timeout");
+});
+
+- Async/Await functions are exists because of callbacks.
+//--------------------------------------------------------------------------------------------------
+-> Callback hell:
+
+- The function calling and depending on other function. the depending function also depending on callback function.
+this is called as callback hell.
+- the callback function calling other function as the level grows of callbacks, the code increases horizontally instead vertically
+this is called as Callback hell or pyramid of doom.
+
+ex. 
+getOrders(user, (orders) => {
+    processOrders(orders, (processed) => {
+        sendEmail(processed, (confirmation) => {
+            console.log("Order Processed:", confirmation);
+        });
+    });
+});
+//--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> Blocking main thread:
+- an operation blocks the call stack it is known as Blocking main thread.
+ 
+-

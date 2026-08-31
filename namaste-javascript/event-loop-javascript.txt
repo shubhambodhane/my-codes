@@ -1,0 +1,23 @@
+->Event loop in JavaScript:
+
+- The Event loop in JavaScript monitors continuously to call stack, callback queue, microtask queue. 
+- Whenever call stack will be empty, event loop will push the tasks from callback queue to call stack for execution. then call stack will execute the task.
+- All callback function from promises, mutation will go in the Microtask queue.
+- All other callback function will go in callback queue/Macro-task queue.(ex. setTimeout, setInterval, fetch, other web API etc.)
+
+=> Microtask queue: promises, mutation
+=> callback queue/Macro-task queue: setTimeout, setInterval, fetch, etc.
+
+-> How it will working?
+1. global call stack (main call stack ) has task running and completed, and in idle condition.
+2. The event loop will monitors and send the task to execute in main call stack.
+3. The microtask queue will have more priority than callback queue.
+4. the task from microtask queue will execute in call stack then tasks from callback queue/macro-task queue.
+5. This way event loop is working.
+
+-> if event loop is not there?
+- JavaScript would become purely synchronous. 
+- the task will execute but there will be miss-management.
+- browser will be freeze.
+- the UI may update late, or incorrect as operation are going.
+- Real life example: a busy route, with no traffic signal, no traffic police officers, and people are not following rules. they will stuck in traffic.

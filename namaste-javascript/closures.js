@@ -3,6 +3,17 @@
 // Closures: the function bind together with it's lexical environment.
 // Lexical environment: the access to local memory and reference to parental scope.
 
+//Uses of closures:
+//- SetTimeouts
+//- Iterators
+//- memoize
+//- functions like 'once'
+
+// Disadvantages of Closures:
+// - memory over consumption as variables created they consuming memory and garbage will be collected after program executed
+// - if not handled properly it may lead to memory leaks.
+
+//----------------------------------------------------------------------------
 // function b() {
 //   var a = 3;
 //   return function y() {

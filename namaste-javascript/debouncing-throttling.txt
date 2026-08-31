@@ -1,0 +1,71 @@
+-The Debouncing and throttling are the techniques used in the performance optimization.
+
+//--------------------------------------------------------------------------
+-> Debouncing: 
+- The function which is executing repeatedly, using the debouncing we delay the execution of these function.
+- we delay the function execution.
+- ex. amazon search box 
+- if we search "samsung" so instead calling api for 8 time, the debouncing method we delay exection and will call the api 1 time.
+
+ex.
+
+<input onKeyUp={debouncing(getData,2000)} name="deboucing"/>  
+
+function getData(){
+// console.log(data);
+}
+
+function debouncing(fn,delay){
+let timer;
+return function(){
+
+const context = this;
+const args = arguments;
+clearTimeout(timer);
+timer = setTimeout(()=>{
+fn.apply(context,args);
+},delay);
+
+}
+}
+//--------------------------------------------------------------------------
+
+-> Throttling:
+- the throllting will be used to limit the exection of the function.
+- the function execution will be limited.
+- ex. submit button in form
+- the once the submit button hit in the form the button will be disabled until the result comes.
+- after the result comes the submit button will be enabled again for making changes in the form. 
+
+ex. < button onClick=(throttle(submitData,3000))>Submit</button>
+
+function submitData(){
+// console.log(data);
+}
+
+function throttle(fn,limit){
+let flag=true;
+return function(){
+const context = this;
+const args = arguments;
+
+if(flag){
+flag = false;
+fn.apply(context,args);
+setTimeout(()=>{
+flag=true;
+}, limit);
+}
+
+}
+
+//--------------------------------------------------------------------------
+> Debouncing:
+- the function will execute after the delay.
+- delay the function execution
+//--------------------------------------------------------------------------
+> Throttling:
+- the function will execute once again after user requests it.
+- the function will limit the execution of specific function.
+
+//--------------------------------------------------------------------------

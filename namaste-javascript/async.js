@@ -1,8 +1,10 @@
 // async functions always returns a promise.
 // async and await are keyword in javascript
 // await is only used in async function.
-// easy way to handle promise
-//async and await combo is best way to handle async functions
+// easy way to handle promise.
+// easy to read and easy to manage the code.
+// async and await combo is best way to handle async functions
+// if the function is async still the function will execute even await is not the function.
 
 const p = new Promise((resolve, reject) => {
   resolve("Promise resolved");

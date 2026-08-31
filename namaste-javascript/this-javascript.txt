@@ -1,0 +1,55 @@
+This keyword in JavaScript:
+
+- the this keyword it will point to global object based on the environment we called.
+- ex. for browser: window is the global object.
+- this keyword works differently in strict mode and non-strict mode.
+- this keyword value depends on how the function is called.
+
+-> for strict mode:
+- this value will be undefined.
+
+-> for non-strict mode:
+- this value will be window.
+
+- the behavior happens because of substitution, in strict mode it will be undefined. and for non strict mode it will be replace with global object.
+- apply, call, bind method can be used to change the value this, overwrite value of this.
+
+- the arrow function do not have their own binding with this. they take the value from enclosing lexical context. 
+- if we call/use the this inside the DOM element, it will reference to the HTML element.
+
+//--------------------------------------------------------------------------------------------------------
+ex. 
+const obj = {
+a:20,
+x:function(){
+const y= ()=>{
+console.log(this);
+	   }
+	}
+}
+obj.x();
+
+output: // coz of lexical context, 
+{a:20, x:fn}
+
+//--------------------------------------------------------------------------------------------------------
+ex. const obj = {
+a:10,
+x:()=>{
+console.log(this);
+	}
+}
+
+obj.x();
+
+//output:
+// window : global object
+// call value to log is enclosed lexical context with global object hence output is global object.
+
+//--------------------------------------------------------------------------------------------------------
+
+ 
+
+
+
+

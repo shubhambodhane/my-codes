@@ -1,0 +1,33 @@
+- The async or defer will be used in the script tag.
+
+when HTML page is rendering, it has script tag in it, it will start fetching and execute in immediately ,
+ once it is completed then it will do remaining.
+the html rendering.
+- ex. <script src="./file.js">
+
+async:
+- the async will be used in the script tag.
+- the html start rendering/parsing ,the script will also start fetching, 
+- once script is loaded it will start executing stoping html parsing,
+- as script execution is done then the remaining html do rendering.
+- ex. <script async src="./file.js">
+
+
+
+defer:
+- the defer will be used in the script.
+- html rendering and script fetching will do parallelly,
+- once the script fetching is completed, it will wait for html to finish the rendering
+- as html rendering finished then the script will start executing. 
+- ex. <script defer src="./file.js">
+
+HTML rendering with Script:
+ <--------------------------------------------------------------------------------->
+ normal: 
+ ---------->|...fetch...|...Execute...| 
+
+ async: 
+ |----------fetch-------------->> |...execute...|
+ 
+ defer: script fetching:
+ |-------------------------->> fetching done........(wait for HTML parsing)..........>> script execution.

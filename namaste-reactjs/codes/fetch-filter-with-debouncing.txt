@@ -1,0 +1,54 @@
+import React from 'react';
+
+
+export default function App() {
+  const url = 'https://jsonplaceholder.typicode.com/users';
+  const [data, setData] = React.useState([]);
+  const [text, setText] = React.useState('');
+  const [filterData, setFilterData] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    try {
+      const api = await fetch(url);
+      const res = await api.json();
+      setData(res);
+      setFilterData(res);
+    } catch (e) {
+      console.error(e.message);
+    }
+  }
+
+  React.useEffect(() => {
+    let timer = setTimeout(() => {
+      let updatedData = data.filter((itm, id) => {
+        return itm.name.toLowerCase().includes(text.toLowerCase());
+      });
+      setFilterData(updatedData);
+    }, 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [text, data]);
+
+  return (
+    <div>
+      <h1>Hello, Filter Data!</h1>
+      <label>Search: </label>
+      <input
+        value={text}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
+      />
+      <ul>
+        {filterData.map((itm, id) => {
+          return <li key={id}>{itm.name}</li>;
+        })}
+      </ul>
+    </div>
+  );
+}

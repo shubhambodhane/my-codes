@@ -1,0 +1,63 @@
+import React, { useState } from 'react';
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemPerPage, setItemsPerPage] = useState(5);
+  const data = [
+    { id: 1, name: 'a1' },
+    { id: 2, name: 'a2' },
+    { id: 3, name: 'a3' },
+    { id: 4, name: 'a4' },
+    { id: 5, name: 'a5' },
+    { id: 6, name: 'a6' },
+    { id: 7, name: 'a7' },
+    { id: 8, name: 'a8' },
+    { id: 9, name: 'a9' },
+    { id: 10, name: 'a10' },
+    { id: 11, name: 'a11' },
+    { id: 12, name: 'a12' },
+  ];
+// function to handle items per page
+  function handlePrev() {
+    setCurrentPage((prev) => prev - 1);
+  }
+  function handleNext() {
+    setCurrentPage((prev) => prev + 1);
+  }
+  function goSpecificPage(num) {
+    setCurrentPage(num);
+  }
+// to handle items per page logic
+  let totalPages = Math.ceil(data.length / itemPerPage);
+  const startIndex = (currentPage - 1) * itemPerPage;
+  const endIndex = startIndex + itemPerPage;
+  const currentItems = data.slice(startIndex, endIndex);
+  return (
+    <>
+      total pages: {totalPages}
+      <ul>
+        {currentItems.map((it, index) => {
+          return <li key={index}>{it.name}</li>;
+        })}
+        <button onClick={handlePrev} disabled={currentPage === 1}>
+          Prev
+        </button>
+        {Array.from({ length: totalPages }, (_, i) => {
+          return (
+            <button
+              key={i}
+              onClick={() => {
+                goSpecificPage(i + 1);
+              }}
+            >
+              {i + 1}
+            </button>
+          );
+        })}
+        <button onClick={handleNext} disabled={currentPage == totalPages}>
+          Next
+        </button>
+      </ul>
+    </>
+  );
+}

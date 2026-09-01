@@ -1,0 +1,49 @@
+import { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [text, setText] = useState<string>('');
+  const [items, setItems] = useState<any | null>(['New']);
+
+  function handleAdd() {
+    if(text.trim().length >1){
+      setItems([...items,text]);
+      setText("");
+    }
+  }
+  
+  function handleRemove(index: number) {
+    let myList = items.filter((_:any, no:number)=>{return (no !== index)});
+    setItems(myList);
+  }
+  return (
+    <>
+      <section id="center">
+        <h4>List: Add/Remove</h4>
+        <input
+          name="addItem"
+          value={text}
+          placeholder="enter..."
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+        />
+        <button type="button" onClick={handleAdd}>
+          Add
+        </button>
+        {items?.map((item: any, index: number) => {
+          return (
+            <ul key={index}>
+              <li>{item}</li>
+              <button type="button" onClick={()=>handleRemove(index)}>
+                Remove
+              </button>
+            </ul>
+          );
+        })}
+      </section>
+    </>
+  );
+}
+
+export default App;

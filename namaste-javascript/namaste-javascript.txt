@@ -146,3 +146,29 @@ Arguments:
 - when calling function the actual values are passed to it called as Arugments.
 - ex. function(arg1,arg2); // arguments;
 //------------------------------------------------------------------------------
+
+-> Normal function:
+
+- Normal function declarations are hoisted.
+- Normal functions create their own this context.
+- Normal functions have access to the arguments object.
+- Normal functions can be used as constructors with the new keyword to create object instances.
+- Normal functions are better suited for methods, constructors, or when dynamic this binding is needed.
+- ex. function a(){
+console.log("normal function");
+}
+a();
+//------------------------------------------------------------------------------
+-> Arrow function:
+
+- Arrow functions, however, do not have their own this and inherit it lexically from the surrounding scope.
+- Arrow functions, being expressions, are not hoisted and cannot be accessed before initialization.
+- Arrow functions do not have their own arguments object and require the use of rest parameters (...args) instead.
+- Arrow functions cannot be used as constructors and will throw an error if used with new.
+- Arrow functions are ideal for short, concise functions, especially as callbacks or when this binding is not required
+
+ex. const a = ()=> {
+console.log("arrow function");
+}
+a();
+//------------------------------------------------------------------------------

@@ -1,0 +1,69 @@
+Event Capturing and Event Bubbling:
+
+- Event propogation in DOM tree are two way:
+1. Event Bubbling 
+2. Event Capturing
+
+1. Event Capturing: Event Trickling:
+- it is also known as event trickling.
+- the event propogation from top to bottom in DOM tree is called as Event Capturing.
+- first event capturing will happen.
+- to use need to set flag as "true"; 
+
+2. Event Bubbling:
+- the event propogation from bottom to top in DOM tree is called as Event Bubbling.
+- second event bubbling will happen.
+- to use need to set flag as "false";
+
+how:?
+addEventListener("click",(e)=> {}, boolean);
+click: event type
+callback: e()=>{}
+boolean: true/ false.
+if true: event capturing
+if false: event bubbling
+ 
+ex. 
+event capturing: ->->->
+Grand parent > parent > grandchild
+event bubbling:  <-<-<-
+
+-> e.stopPropogation():
+- used to skip the propogation cycle of event.
+- to use this need to write in callback of addevent listner
+
+ex. HTML 
+<div id="grand-parent">
+	<div id="parent">
+		<div id="grand-child">
+		</div>
+	</div>
+</div>
+<script defer src="./file.js"></script>
+
+code:
+document.queryselector("#grand-parent").addEventListener("click",(e)=>{c.log("grand-parent")}, true);
+document.queryselector("#parant").addEventListener("click",(e)=>{c.log("parent")}, true);
+document.queryselector("#grand-child").addEventListener("click",(e)=>{c.log("grand-child"); e.stopPropogation();}, false);
+//---------------------------------------------------------------------------------------------------------------------------
+
+-> Event Delegation:
+- An event listener added to parent element to handle events for its child elements.
+- it is based on event bubbling.
+- using delegation we can get better performance.
+- better code readability (as one event listener will be there to parent only)
+- better memory usage.
+- for blur, focus, scroll, re-sizing are mot bubbled up. some event do not propogate.
+- event stop propogation will work here.
+
+ex.
+<ul id="cat">
+	<li id="one">one</li>
+	<li id="two">two</li>
+	<li id="three">three</li>
+</ul>
+
+code:
+document.queryselector("#cat).addEventListener("click", (e)=> {c.log(e.target.id); c.log(r.target.tagName); });
+
+//---------------------------------------------------------------------------------------------------------------------------
